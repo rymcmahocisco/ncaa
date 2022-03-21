@@ -1,4 +1,4 @@
-name: GitHub CVE
+name: GitHub CVE2
 on: [push]
 jobs:
   CVETag:
