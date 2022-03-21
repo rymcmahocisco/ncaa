@@ -7,10 +7,10 @@ jobs:
 
     steps:
       - name: GET CVE
-        env:
-          CVE: $( echo '${{github.event.head_commit.message}}' |    grep -i -oe  'CVE-\d{4}-\d{4,7}' | head -1)
-        run: echo "CVE is $CVE"
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+        run: |
+          CVE = $( echo '${{github.event.head_commit.message}}' |    grep -i -oe  'CVE-\d{4}-\d{4,7}' | head -1)
+          echo "CVE=$CVE" >> $GITHUB_ENV
+      - run: echo "CVE is ${{ env.CVE }} "
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
         uses: actions/checkout@v2
