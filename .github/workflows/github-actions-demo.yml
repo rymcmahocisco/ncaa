@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: GET CVE
         run: |
-          CVE = $( echo '${{github.event.head_commit.message}}' |    grep -i -oe  'CVE-\d{4}-\d{4,7}' | head -1)
+          CVE=$( echo '${{github.event.head_commit.message}}' |    grep -i -oe  'CVE-\d{4}-\d{4,7}' | head -1)
           echo "CVE=$CVE" >> $GITHUB_ENV
       - run: echo "CVE is ${{ env.CVE }} "
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
