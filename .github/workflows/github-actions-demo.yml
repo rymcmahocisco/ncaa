@@ -6,7 +6,10 @@ jobs:
     if: " contains(github.event.head_commit.message, 'CVE-') "
 
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - name: GET CVE
+        run: |
+          CVE =   $(${{ github.event.head_commit.message }} | grep -i -oe  'CVE-2014-0160' | head -1)
+      - run: echo "CVE is $CVE"
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
